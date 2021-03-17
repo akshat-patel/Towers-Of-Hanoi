@@ -74,6 +74,34 @@ struct Board *allocateNewTowersArray(struct Board *board, int *numTowers)
     return board;
 }
 
+void evenSplit(int *position, const int i, struct Tower *towers)
+{
+    //create a tower to the left with height of half current height
+    (towers)[*position].height = (towers)[i].height / 2;
+    (towers)[*position].xCoord = (towers)[i].xCoord - 1;
+    (towers)[*position].yCoord = (towers)[i].yCoord;
+    *position += 1;
+    //change current tower to be the one on the right
+    (towers)[i].height = (towers)[i].height / 2;
+    (towers)[i].xCoord = (towers)[i].xCoord + 1;    
+}
+
+void oddSplit(int *position, const int i, struct Tower *towers)
+{
+    //create a tower below with height of half current height minus one
+    (towers)[*position].height = ((towers)[i].height - 1) / 2;
+    (towers)[*position].xCoord = (towers)[i].xCoord;
+    (towers)[*position].yCoord = (towers)[i].yCoord - 1;
+    *position += 1;
+    //create a tower above with height of half current height minus one
+    (towers)[*position].height = ((towers)[i].height - 1) / 2;
+    (towers)[*position].xCoord = (towers)[i].xCoord;
+    (towers)[*position].yCoord = (towers)[i].yCoord + 1;
+    *position += 1;
+    //change current tower to have a height of 1
+    (towers)[i].height = 1;
+}
+
 void _splittingTowers(struct Board *board, int *numTowers)
 {
     int originalNumTowers = *numTowers;
