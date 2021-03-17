@@ -15,6 +15,17 @@ struct Board
     struct Tower *towers;
 };
 
+void testSetup(const struct Board *board, const int *numTowers)
+{
+    //test to see if @board->towers is initialized properly
+    for(int i = 0; i < *numTowers; ++i)
+    {
+        printf("Tower %d: {%d, %d}. Height = %d\n", i + 1, (board->towers)[i].xCoord, 
+                (board->towers)[i].yCoord, (board->towers)[i].height);
+    }
+    printf("=========================\n");
+}
+
 struct Board *initializeBoard(const int numTowers, int *xCoords, int *yCoords, int *heights)
 {
     struct Board *retBoard = malloc(sizeof(struct Board));
@@ -36,4 +47,7 @@ int *splittingTowers(int *xCoords, int* yCoords, int* heights, int numTowers, in
     for(int i = 0; i < numTowers; ++i)
         if(heights[i] <= 0)
             return NULL;
+    
+    struct Board *board = initializeBoard(numTowers, xCoords, yCoords, heights);
+    testSetup(board, &numTowers);
 }
