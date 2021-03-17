@@ -79,6 +79,19 @@ void _splittingTowers(struct Board *board, int *numTowers)
     int originalNumTowers = *numTowers;
     int position = originalNumTowers;
     struct Board *retBoard = allocateNewTowersArray(board, numTowers);
+    for(int i = 0; i < originalNumTowers; ++i)
+    {
+        if((retBoard->towers)[i].height == 1)
+            continue;
+        if((retBoard->towers)[i].height % 2 == 0)
+        {
+            // do an even split on the board
+        }
+        else
+        {
+            // do an odd split on the board
+        }
+    }
 }
 
 int *splittingTowers(int *xCoords, int* yCoords, int* heights, int numTowers, int* maxStars)
