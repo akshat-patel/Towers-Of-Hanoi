@@ -3,6 +3,17 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+struct Tower
+{
+    int xCoord;
+    int yCoord;
+    int height;
+};
+
+struct Board
+{
+    struct Tower *towers;
+};
 
 int *splittingTowers(int *xCoords, int* yCoords, int* heights, int numTowers, int* maxStars)
 {
