@@ -102,6 +102,29 @@ void oddSplit(int *position, const int i, struct Tower *towers)
     (towers)[i].height = 1;
 }
 
+int findMaxStars(const struct Tower *towers, const int numTowers)
+{
+    int maxStars = 0;
+    int count = 0;
+    for(int j = 0; j < numTowers; ++j)
+    {
+        for(int i = 0; i < numTowers; ++i)
+        {
+            if(towers[j].xCoord == towers[i].xCoord 
+               && towers[j].yCoord == towers[i].yCoord)
+            {   
+                ++count;
+            }
+        }
+        if(count >= maxStars)
+        {
+            maxStars = count;
+        }
+        count = 0;
+    }
+    return maxStars;       
+}
+
 void _splittingTowers(struct Board *board, int *numTowers)
 {
     int originalNumTowers = *numTowers;
@@ -149,4 +172,6 @@ int *splittingTowers(int *xCoords, int* yCoords, int* heights, int numTowers, in
     
     struct Board *board = initializeBoard(numTowers, xCoords, yCoords, heights);
     // testSetup(board, &numTowers);
+    _splittingTowers(board, &numTowers);
+    *maxStars = findMaxStars(board->towers, numTowers);
 }
