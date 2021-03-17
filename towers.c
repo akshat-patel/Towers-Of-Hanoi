@@ -114,12 +114,28 @@ void _splittingTowers(struct Board *board, int *numTowers)
         if((retBoard->towers)[i].height % 2 == 0)
         {
             // do an even split on the board
+            evenSplit(&position, i, retBoard->towers);
         }
         else
         {
             // do an odd split on the board
+            oddSplit(&position, i, retBoard->towers);
         }
     }
+    // testSetup(retBoard, numTowers);
+
+    //if there is any tower with a height that is not 
+    //1, run the function again
+    for(int i = 0; i < *numTowers; ++i)
+    {
+        if((retBoard->towers)[i].height != 1)
+        {
+            _splittingTowers(retBoard, numTowers);
+            break;
+        }
+            
+    }
+    return;
 }
 
 int *splittingTowers(int *xCoords, int* yCoords, int* heights, int numTowers, int* maxStars)
