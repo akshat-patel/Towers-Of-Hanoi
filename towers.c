@@ -39,6 +39,48 @@ struct Board *initializeBoard(const int numTowers, int *xCoords, int *yCoords, i
     return retBoard;
 }
 
+struct Board *allocateNewTowersArray(struct Board *board, int *numTowers)
+{
+    //allocate a new @towers array based on the previous @towers array's
+    //heights. 
+    int amountToMalloc = 0;
+    for(int i = 0; i < *numTowers; ++i)
+    {
+        if(!((board->towers)[i].height == 1))
+        {
+            ++amountToMalloc;
+        }
+        else
+        {
+            ++amountToMalloc;
+            continue;
+        }
+
+        if((board->towers)[i].height % 2 == 0)
+        {
+            ++amountToMalloc;
+        }
+        else
+        {
+            //odd
+            amountToMalloc += 2;
+        }
+    }
+    struct Tower *newTowers = malloc(amountToMalloc * sizeof(struct Tower));
+    memcpy(newTowers, board->towers, *numTowers * sizeof(struct Tower));
+    *numTowers = amountToMalloc;
+    free(board->towers);
+    board->towers = newTowers;
+    return board;
+}
+
+void _splittingTowers(struct Board *board, int *numTowers)
+{
+    int originalNumTowers = *numTowers;
+    int position = originalNumTowers;
+    struct Board *retBoard = allocateNewTowersArray(board, numTowers);
+}
+
 int *splittingTowers(int *xCoords, int* yCoords, int* heights, int numTowers, int* maxStars)
 {
     if (!xCoords || !yCoords || !heights || !maxStars) return NULL;
@@ -49,5 +91,5 @@ int *splittingTowers(int *xCoords, int* yCoords, int* heights, int numTowers, in
             return NULL;
     
     struct Board *board = initializeBoard(numTowers, xCoords, yCoords, heights);
-    testSetup(board, &numTowers);
+    // testSetup(board, &numTowers);
 }
