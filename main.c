@@ -55,8 +55,43 @@ void noNegNumStones()
     }
 }
 
+void testInitializeBoard()
+{
+    {
+        /*
+        int xCoords[] = {2,3,-2,-4};
+	    int yCoords[] = {1,-1,-1,4};
+	    int heights[] = {4, 3, 2, 1};
+	    int numTowers = 4;
+	    int maxStars = -1;
+	    int *arr = splittingTowers(xCoords, yCoords, heights, numTowers,&maxStars);
+        free(arr);
+        */
+    }
+        
+    {
+        int xCoords[] = {1,2,1,0,1};
+	    int yCoords[] = {1,1,2,1,0};
+	    int heights[] = {11, 8, 5, 7, 3};
+	    int numTowers = 5;
+	    int maxStars = -1;
+	    int *arr = splittingTowers(xCoords, yCoords, heights, numTowers,&maxStars);
+        printf("maxStars = %d\n", maxStars);
+
+        for(int i = 0; i < maxStars; ++i)
+        {
+            printf("%d ", arr[i]);
+        }
+        printf("\n");
+        
+        free(arr);
+    }
+}
+
+
 int main()
 {
-    noNegNumStones();
-    noNullArguments();
+    // noNegNumStones();
+    // noNullArguments();
+    testInitializeBoard();
 }

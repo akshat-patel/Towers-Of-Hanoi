@@ -215,4 +215,8 @@ int *splittingTowers(int *xCoords, int* yCoords, int* heights, int numTowers, in
     _splittingTowers(board, &numTowers);
     *maxStars = findMaxStars(board->towers, numTowers);
     int *retVal = splittingTowersRet(maxStars, board->towers, numTowers);
+    free(board->towers);
+    free(board);
+    //responsibility of caller of splittingTowers to free the return value
+    return retVal;
 }
