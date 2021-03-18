@@ -161,6 +161,13 @@ void _splittingTowers(struct Board *board, int *numTowers)
     return;
 }
 
+//sets a tower's height to -1 so that splittingTowersRet 
+//doesn't increment count on future iterations
+void setTowerToInvalid(struct Tower *t)
+{
+    t->height = -1;
+}
+
 int *splittingTowersRet(const int *maxStars, struct Tower *towers, const int numTowers)
 {
     int *retVal = calloc(*maxStars, sizeof(int));
@@ -178,6 +185,7 @@ int *splittingTowersRet(const int *maxStars, struct Tower *towers, const int num
                 {
 
                     // set tower to an invalid state
+                    setTowerToInvalid(&towers[k]);
                 }
             }
         }
