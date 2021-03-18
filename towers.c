@@ -161,6 +161,38 @@ void _splittingTowers(struct Board *board, int *numTowers)
     return;
 }
 
+int *splittingTowersRet(const int *maxStars, struct Tower *towers, const int numTowers)
+{
+    int *retVal = calloc(*maxStars, sizeof(int));
+    int count = 0;
+    for(int j = 0; j < numTowers; ++j)
+    {
+        for(int k = j; k < numTowers; ++k)
+        {
+            if((towers[j].xCoord == towers[k].xCoord 
+                && towers[j].yCoord == towers[k].yCoord)
+                && towers[k].height != -1)
+            {
+                count++;
+                if(k > j)
+                {
+
+                    // set tower to an invalid state
+                }
+            }
+        }
+        for(int z = 1; z <= *maxStars; ++z)
+        {
+            if(count == z && count != 0)
+            {
+                retVal[z-1] += 1;
+            }
+        }
+        count = 0;
+    }
+    return retVal;
+}
+
 int *splittingTowers(int *xCoords, int* yCoords, int* heights, int numTowers, int* maxStars)
 {
     if (!xCoords || !yCoords || !heights || !maxStars) return NULL;
@@ -174,4 +206,5 @@ int *splittingTowers(int *xCoords, int* yCoords, int* heights, int numTowers, in
     // testSetup(board, &numTowers);
     _splittingTowers(board, &numTowers);
     *maxStars = findMaxStars(board->towers, numTowers);
+    int *retVal = splittingTowersRet(maxStars, board->towers, numTowers);
 }
